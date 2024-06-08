@@ -1,4 +1,5 @@
 const routes: { [key: string]: string } = {
+  "vercel-docker-proxy.vercel.app": "https://registry-1.docker.io",
   "docker-vercel.libcuda.so": "https://registry-1.docker.io",
   "quay-vercel.libcuda.so": "https://quay.io",
   "gcr-vercel.libcuda.so": "https://gcr.io",
