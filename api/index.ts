@@ -109,7 +109,11 @@ app.all("*", async (c) => {
     headers: headers,
     redirect: "follow",
   });
-  return await fetch(newReq);
+  const resp = await fetch(newReq);
+  if (c.req.method === "HEAD") {
+    resp.headers.set("Content-Type", "application/vnd.oci.image.index.v1+json");
+  }
+  return resp;
 });
 
 app.notFound(async (c) => {
