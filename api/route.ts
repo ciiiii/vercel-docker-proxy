@@ -13,9 +13,6 @@ function routeByHosts(host: string) {
   if (host in routes) {
     return routes[host];
   }
-  // if (MODE == "debug") {
-  //   return TARGET_UPSTREAM;
-  // }
   return "";
 }
 

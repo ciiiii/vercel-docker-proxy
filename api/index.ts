@@ -100,6 +100,10 @@ app.all("*", async (c) => {
   if (acceptHeader) {
     headers.set("Accept", acceptHeader);
   }
+  const contentTypeHeader = c.req.raw.headers.get("Content-Type");
+  if (contentTypeHeader) {
+    headers.set("Content-Type", contentTypeHeader);
+  }
   const newReq = new Request(newUrl, {
     method: c.req.method,
     headers: headers,
