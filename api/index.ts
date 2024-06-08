@@ -22,7 +22,7 @@ app.use(appendTrailingSlash());
 app.use(async (c, next) => {
   const { DEBUG, UPSTREAM } = env(c);
   const url = new URL(c.req.url);
-  if (DEBUG && UPSTREAM ) {
+  if (DEBUG && UPSTREAM) {
     c.set("debug", true);
     c.set("url", url);
     c.set("upstream", UPSTREAM as string);
@@ -46,7 +46,6 @@ app.use(async (c, next) => {
   }
   await next();
 });
-
 
 app.all("/", async (c) => {
   const newUrl = new URL(c.get("upstream") + "/v2/");
@@ -89,7 +88,8 @@ app.all("/auth", async (c) => {
   return await fetchToken(wwwAuthenticate, c.get("url").searchParams);
 });
 
-app.notFound(async (c) => {
+app.all("*", async (c) => {
+  console.log(c.req.url.toString());
   const newUrl = new URL(c.get("upstream") + c.get("url").pathname);
   let headers = new Headers();
   const authHeader = c.req.raw.headers.get("Authorization");
@@ -106,6 +106,10 @@ app.notFound(async (c) => {
     redirect: "follow",
   });
   return await fetch(newReq);
+});
+
+app.notFound(async (c) => {
+  return new Response("Page Not Found", { status: 404 });
 });
 
 export default handle(app);
