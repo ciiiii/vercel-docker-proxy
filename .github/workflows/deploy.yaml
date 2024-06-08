@@ -23,6 +23,8 @@ jobs:
         with:
           version: 7
           run_install: false
+      - name: Configure pnpm
+        run: pnpm config set auto-install-peers true
       - name: Pull Vercel Environment Information
         run: pnpm vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
