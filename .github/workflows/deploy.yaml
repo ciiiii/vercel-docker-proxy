@@ -5,9 +5,9 @@ env:
 on:
   push:
     branches:
-      - main
+      - master
     paths-ignore:
-      - 'README.md'
+      - "README.md"
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
